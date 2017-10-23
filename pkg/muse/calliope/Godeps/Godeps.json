@@ -1,0 +1,12 @@
+{
+	"ImportPath": "github.com/LOG-ED/orazio/pkg/muse/calliope",
+	"GoVersion": "go1.9",
+	"GodepVersion": "v79",
+	"Deps": [
+		{
+			"ImportPath": "github.com/moby/moby/pkg/namesgenerator",
+			"Comment": "docs-v1.12.0-rc4-2016-07-15-7797-gc982ee805",
+			"Rev": "c982ee805d895a4fc2bf01f2d1d8afa06b408dd0"
+		}
+	]
+}

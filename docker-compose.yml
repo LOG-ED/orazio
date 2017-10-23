@@ -9,6 +9,7 @@ services:
     ports:
       - "8080:8080"
   calliope:
-    build: ./pkg/muse/calliope
+    build:
+      context: ./pkg/muse/calliope
     ports:
       - "9090:9090"
