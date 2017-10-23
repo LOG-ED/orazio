@@ -6,22 +6,23 @@ import (
 	"github.com/garyburd/redigo/redis"
 )
 
-func GetInspiratio() string {
+func GetInspiratio() []string {
 	// Connect to localhost, make sure to have redis-server running on the default port
-	conn, err := redis.Dial("tcp", ":6379")
+	conn, err := redis.Dial("tcp", "redis:6379")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer conn.Close()
 
 	// Ask redigo for []string result for key muse
-	strs, err := redis.Strings(conn.Do("MGET", "muse"))
+	muse, err := redis.Strings(conn.Do("MGET", "muse"))
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	if strs == nil {
+	if muse == nil {
 		// Return default value
-		return "127.0.0.1:9090"
+		return []string{"http://calliope:9090"}
 	}
+	return muse
 }

@@ -1,0 +1,14 @@
+version: '3.2'
+services:
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+  orazio:
+    build: .
+    ports:
+      - "8080:8080"
+  calliope:
+    build: ./pkg/muse/calliope
+    ports:
+      - "9090:9090"
