@@ -19,10 +19,10 @@ func GetInspiratio() []string {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	if muse == nil {
-		// Return default value
-		return []string{"http://calliope:9090"}
+	if len(muse) > 1 {
+		return muse
 	}
-	return muse
+
+	// Return default value
+	return []string{"http://calliope:9090"}
 }

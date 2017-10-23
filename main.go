@@ -10,14 +10,13 @@ import (
 )
 
 func main() {
+	log.Println("starting orazio...")
 	http.HandleFunc("/", handler)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	log.Println("starting orazio...")
-	t := template.New("satirae")
-	t, _ = t.ParseFiles("tmpl/satirae.html")
+	t := template.Must(template.ParseFiles("tmpl/satirae.html"))
 	var out string
 	muse := inspiratio.GetInspiratio()
 	for _, m := range muse {
@@ -25,12 +24,16 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		resp, err := http.Get(m)
 		if err != nil {
 			log.Println("an error occured: " + err.Error())
+			return
 		}
 		defer resp.Body.Close()
 		body, err := ioutil.ReadAll(resp.Body)
 		if err != nil {
-			out = out + " " + string(body)
+			log.Println("an error occured: " + err.Error())
+			return
 		}
+		out = out + " " + string(body)
 	}
+	log.Println("render web page with text: " + out)
 	t.Execute(w, out)
 }

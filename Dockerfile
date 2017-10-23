@@ -9,4 +9,5 @@ FROM alpine:latest
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 COPY --from=0 /go/src/github.com/log-ed/orazio/app .
+COPY --from=0 /go/src/github.com/log-ed/orazio/tmpl/satirae.html tmpl/satirae.html
 CMD ["./app"]
