@@ -7,46 +7,38 @@ import (
 )
 
 func GetMuse() []string {
-	// Get a new client
-	client, err := api.NewClient(
-		&api.Config{
-			Address: "consul:8500",
-			Scheme:  "http",
-		},
-	)
+	// Get a new client with custom config
+	conf := api.DefaultConfig()
+	conf.Address = "consul:8500"
+
+	client, err := api.NewClient(conf)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	catalog := client.Catalog()
 
-	node, _, err := catalog.Node("muse", nil)
+	meta := map[string]string{"muse": "muse"}
+	services, _, err := catalog.Services(
+		&api.QueryOptions{
+			NodeMeta: meta,
+		},
+	)
 	if err != nil {
-		// Add a new default service
-		service := &api.AgentService{
-			ID:      "calliope",
-			Service: "calliope",
-			Tags:    []string{"muse", "v1"},
-			Port:    9090,
-		}
-
-		// Init the catalog
-		reg := &api.CatalogRegistration{
-			Datacenter: "dc1",
-			Node:       "muse",
-			Address:    "calliope",
-			Service:    service,
-		}
-		if _, err := catalog.Register(reg, nil); err != nil {
-			log.Fatal(err)
-		}
-	}
-
-	if _, ok := node.Services["calliope"]; ok {
-		log.Fatal("ServiceID:calliope is not registered")
+		log.Fatal("consul error: " + err.Error())
 	}
 
 	// TODO: return all the services
-	defSvc := node.Services["calliope"].Address + ":" + string(node.Services["calliope"].Port)
-	return []string{defSvc}
+	if _, ok := services["calliope"]; ok {
+		log.Println("return calliope service address")
+		s, _, err := catalog.Service("calliope", "", nil)
+		if err != nil {
+			log.Fatal("consul error: " + err.Error())
+		}
+		svcURL := s[0].Address + ":" + string(s[0].ServicePort)
+		return []string{svcURL}
+	}
+
+	//return default value
+	return []string{"http://calliope:9090"}
 }
