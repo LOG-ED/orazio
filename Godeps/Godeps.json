@@ -2,23 +2,5 @@
 	"ImportPath": "github.com/LOG-ED/orazio",
 	"GoVersion": "go1.9",
 	"GodepVersion": "v79",
-	"Deps": [
-		{
-			"ImportPath": "github.com/hashicorp/go-cleanhttp",
-			"Rev": "3573b8b52aa7b37b9358d966a898feb387f62437"
-		},
-		{
-			"ImportPath": "github.com/hashicorp/go-rootcerts",
-			"Rev": "6bb64b370b90e7ef1fa532be9e591a81c3493e00"
-		},
-		{
-			"ImportPath": "github.com/hashicorp/serf/coordinate",
-			"Comment": "v0.8.1-78-gc20a0b1",
-			"Rev": "c20a0b1b1ea9eb8168bcdec0116688fa9254e449"
-		},
-		{
-			"ImportPath": "github.com/mitchellh/go-homedir",
-			"Rev": "b8bc1bf767474819792c23f32d8286a45736f1c6"
-		}
-	]
+	"Deps": []
 }
