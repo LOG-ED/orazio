@@ -1,28 +1,8 @@
 package muse
 
-import (
-	"log"
-
-	"github.com/garyburd/redigo/redis"
-)
+import consul "github.com/log-ed/orazio/pkg/consul"
 
 func GetInspiratio() []string {
-	// Connect to localhost, make sure to have redis-server running on the default port
-	conn, err := redis.Dial("tcp", "redis:6379")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer conn.Close()
-
-	// Ask redigo for []string result for key muse
-	muse, err := redis.Strings(conn.Do("MGET", "muse"))
-	if err != nil {
-		log.Fatal(err)
-	}
-	if len(muse) > 1 {
-		return muse
-	}
-
-	// Return default value
-	return []string{"http://calliope:9090"}
+	// Connect to consul api, make sure to have consul agent running on the default port
+	return consul.GetMuse()
 }

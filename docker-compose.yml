@@ -1,9 +1,10 @@
 version: '3.2'
 services:
-  redis:
-    image: redis
+  consul:
+    image: consul:0.9.3
+    command: agent -dev -client "0.0.0.0"
     ports:
-      - "6379:6379"
+      - "8500:8500"
   orazio:
     build: .
     ports:
