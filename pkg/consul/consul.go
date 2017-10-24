@@ -28,7 +28,7 @@ func GetMuse() []string {
 		log.Fatal("consul error: " + err.Error())
 	}
 
-	// TODO: return all the services
+	// TODO: return all the services endpoints
 	if _, ok := services["calliope"]; ok {
 		log.Println("return calliope service address")
 		s, _, err := catalog.Service("calliope", "", nil)

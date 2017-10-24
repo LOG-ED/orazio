@@ -20,6 +20,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	var out string
 	muse := inspiratio.GetInspiratio()
 	for _, m := range muse {
+		// Each muse must be an HTTP endpoint in the format http://...
 		log.Println("getting inspiration from muse: " + m)
 		resp, err := http.Get(m)
 		if err != nil {
