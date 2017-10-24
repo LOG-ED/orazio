@@ -1,10 +1,14 @@
 ## Orazio
 
+"poem as a service"  
+
+### Usage
+
 make start
 
 http://localhost:8080/
 
-TODO:  
+### TODO:  
 
 - [X] Servizio web principale (http://localhost:8080)  
 - [X] Template HTML di base  
