@@ -4,6 +4,11 @@
 	"GodepVersion": "v79",
 	"Deps": [
 		{
+			"ImportPath": "github.com/hashicorp/consul/api",
+			"Comment": "v0.9.0-15-g18bd7ed1",
+			"Rev": "18bd7ed1aad4725608c3a1637885b252e886346e"
+		},
+		{
 			"ImportPath": "github.com/hashicorp/go-cleanhttp",
 			"Rev": "3573b8b52aa7b37b9358d966a898feb387f62437"
 		},
